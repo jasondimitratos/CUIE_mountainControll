@@ -126,6 +126,16 @@ public class SimpleControl extends Region {
         return (value - minValue) / (maxValue - minValue);
     }
 
+    private double valueToAngle(double value, double minValue, double maxValue) {
+        return percentageToAngle(valueToPercentage(value, minValue, maxValue));
+    }
+
+    private double mousePositionToValue(double mouseX, double mouseY, double cx, double cy, double minValue, double maxValue){
+        double percentage = angleToPercentage(angle(cx, cy, mouseX, mouseY));
+
+        return percentageToValue(percentage, minValue, maxValue);
+    }
+
     private double angleToPercentage(double angle){
         return angle / 360.0;
     }
