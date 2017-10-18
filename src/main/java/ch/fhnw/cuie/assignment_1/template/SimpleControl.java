@@ -25,11 +25,11 @@ public class SimpleControl extends Region {
 
     private static final double MAXIMUM_WIDTH = 800;
 
-    // Todo: declare all parts
+    // Todo: replace these elements with all parts of your Custom Control
     private Circle backgroundCircle;
     private Text   display;
 
-    // Todo: declare all Properties
+    // Todo: replace this Property with all Properties needed to keep the status of your Custom Control
     private final DoubleProperty value = new SimpleDoubleProperty();
 
     // needed for resizing

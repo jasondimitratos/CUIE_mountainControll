@@ -15,16 +15,16 @@ import ch.fhnw.cuie.assignment_1.template.SimpleControl;
  */
 public class DemoPane extends BorderPane {
 
+    private final PresentationModel pm;
+
     // declare the custom control
     private SimpleControl cc;
-
-    // Placeholders for properties of the application's PresentationModel
-    private final DoubleProperty pmValue = new SimpleDoubleProperty();
 
     // all controls
     private Slider slider;
 
-    public DemoPane() {
+    public DemoPane(PresentationModel pm) {
+        this.pm = pm;
         initializeControls();
         layoutControls();
         setupBindings();
@@ -50,9 +50,9 @@ public class DemoPane extends BorderPane {
     }
 
     private void setupBindings() {
-        slider.valueProperty().bindBidirectional(pmValue);
+        slider.valueProperty().bindBidirectional(pm.valueProperty());
 
-        cc.valueProperty().bindBidirectional(pmValue);
+        cc.valueProperty().bindBidirectional(pm.valueProperty());
     }
 
 }
