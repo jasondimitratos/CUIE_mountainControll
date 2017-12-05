@@ -5,7 +5,7 @@
  
 ## Abgabe
 - Mittwoch, 25.10.2017, 20:42 Uhr
-- Die Abgabe erfolgt durch ein "Push" in Ihr GitHub-Repository.
+- Die Abgabe erfolgt durch ein "Push" auf den Master-Branch Ihres GitHub-Repositories.
 
 ## Bitte beachten Sie
  - Tragen Sie ihren Namen unter "Bearbeitet von" ein. Manche GitHub-Account-Namen können nicht
