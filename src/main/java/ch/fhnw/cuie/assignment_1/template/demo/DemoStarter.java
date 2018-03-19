@@ -11,16 +11,16 @@ import javafx.stage.Stage;
 public class DemoStarter extends Application {
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-        PresentationModel pm = new PresentationModel();
-        Region rootPanel     = new DemoPane(pm);
+	public void start(Stage primaryStage) {
+        DemoPM rootPM    = new DemoPM();
+        Region rootPanel = new DemoPane(rootPM);
 
-		Scene scene = new Scene(rootPanel);
+        Scene scene = new Scene(rootPanel);
 
-		primaryStage.setTitle("Simple Control Demo");
-		primaryStage.setScene(scene);
+        primaryStage.titleProperty().bind(rootPM.demoTitleProperty());
+        primaryStage.setScene(scene);
 
-		primaryStage.show();
+        primaryStage.show();
 	}
 
 	public static void main(String[] args) {

@@ -14,22 +14,29 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
 
+/**
+ * ToDo: CustomControl kurz beschreiben
+ *
+ * ToDo: Autoren ergänzen / ersetzen
+ * @author Dieter Holz
+ */
+//Todo: Umbenennen.
 public class SimpleControl extends Region {
-    private static final double ARTBOARD_WIDTH  = 100;
-    private static final double ARTBOARD_HEIGHT = 100;
+    private static final double ARTBOARD_WIDTH  = 100;  // Todo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
+    private static final double ARTBOARD_HEIGHT = 100;  // Todo: Anpassen an die Breite der Zeichnung
 
     private static final double ASPECT_RATIO = ARTBOARD_WIDTH / ARTBOARD_HEIGHT;
 
-    private static final double MINIMUM_WIDTH  = 25;
+    private static final double MINIMUM_WIDTH  = 25;    // Todo: Anpassen
     private static final double MINIMUM_HEIGHT = MINIMUM_WIDTH / ASPECT_RATIO;
 
-    private static final double MAXIMUM_WIDTH = 800;
+    private static final double MAXIMUM_WIDTH = 800;    // Todo: Anpassen
 
-    // Todo: replace these elements with all parts of your Custom Control
+    // Todo: diese Parts durch alle notwendigen Parts der gewünschten CustomControl ersetzen
     private Circle backgroundCircle;
     private Text   display;
 
-    // Todo: replace this Property with all Properties needed to keep the status of your Custom Control
+    // Todo: ersetzen durch alle notwendigen Properties der CustomControl
     private final DoubleProperty value = new SimpleDoubleProperty();
 
     // needed for resizing
@@ -38,6 +45,7 @@ public class SimpleControl extends Region {
     public SimpleControl() {
         initializeSelf();
         initializeParts();
+        initializeDrawingPane();
         layoutParts();
         setupEventHandlers();
         setupValueChangeListeners();
@@ -45,50 +53,50 @@ public class SimpleControl extends Region {
     }
 
     private void initializeSelf() {
-        // load stylesheets
-        String fonts = getClass().getResource("fonts.css").toExternalForm();
+        String fonts = getClass().getResource("/fonts/fonts.css").toExternalForm();
         getStylesheets().add(fonts);
 
         String stylesheet = getClass().getResource("style.css").toExternalForm();
         getStylesheets().add(stylesheet);
 
-        getStyleClass().add("simpleControl");
+        getStyleClass().add("simple-control");  // Todo: an den Namen der Klasse (des CustomControls) anpassen
     }
 
     private void initializeParts() {
-        //todo initialize all parts
+        //ToDo: alle deklarierten Parts initialisieren
         double center = ARTBOARD_WIDTH * 0.5;
 
         backgroundCircle = new Circle(center, center, center);
-        backgroundCircle.getStyleClass().add("backgroundCircle");
+        backgroundCircle.getStyleClass().add("background-circle");
 
         display = createCenteredText("display");
+    }
 
-        // always needed
+    private void initializeDrawingPane() {
         drawingPane = new Pane();
-        drawingPane.getStyleClass().add("drawingPane");
+        drawingPane.getStyleClass().add("drawing-pane");
         drawingPane.setMaxSize(ARTBOARD_WIDTH, ARTBOARD_HEIGHT);
         drawingPane.setMinSize(ARTBOARD_WIDTH, ARTBOARD_HEIGHT);
         drawingPane.setPrefSize(ARTBOARD_WIDTH, ARTBOARD_HEIGHT);
     }
 
     private void layoutParts() {
-        // todo add all parts to drawingPane
+        // ToDo: alle Parts zur drawingPane hinzufügen
         drawingPane.getChildren().addAll(backgroundCircle, display);
 
         getChildren().add(drawingPane);
     }
 
     private void setupEventHandlers() {
-        //todo
+        //ToDo: bei Bedarf ergänzen
     }
 
     private void setupValueChangeListeners() {
-        //todo
+        //ToDo: bei Bedarf ergänzen
     }
 
     private void setupBinding() {
-        //todo
+        //ToDo dieses Binding ersetzen
         display.textProperty().bind(valueProperty().asString("%.2f"));
     }
 
@@ -117,6 +125,8 @@ public class SimpleControl extends Region {
     }
 
     // some handy functions
+
+    //ToDo: diese Funktionen anschauen und für die Umsetzung des CustomControls benutzen
 
     private double percentageToValue(double percentage, double minValue, double maxValue){
         return ((maxValue - minValue) * percentage) + minValue;
@@ -156,8 +166,8 @@ public class SimpleControl extends Region {
     }
 
     private Point2D pointOnCircle(double cX, double cY, double radius, double angle) {
-        return new Point2D(cX - (radius * Math.cos(Math.toRadians(angle - 90))),
-                           cY + (radius * Math.sin(Math.toRadians(angle - 90))));
+        return new Point2D(cX - (radius * Math.sin(Math.toRadians(angle - 180))),
+                           cY + (radius * Math.cos(Math.toRadians(angle - 180))));
     }
 
     private Text createCenteredText(String styleClass) {
@@ -235,8 +245,9 @@ public class SimpleControl extends Region {
         return ARTBOARD_HEIGHT + verticalPadding;
     }
 
-    // all getter and setter
+    // alle getter und setter  (generiert via "Code -> Generate... -> Getter and Setter)
 
+    // ToDo: ersetzen durch die Getter und Setter Ihres CustomControls
     public double getValue() {
         return value.get();
     }

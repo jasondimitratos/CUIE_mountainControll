@@ -1,7 +1,5 @@
 package ch.fhnw.cuie.assignment_1.template.demo;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -15,15 +13,15 @@ import ch.fhnw.cuie.assignment_1.template.SimpleControl;
  */
 public class DemoPane extends BorderPane {
 
-    private final PresentationModel pm;
+    private final DemoPM pm;
 
     // declare the custom control
     private SimpleControl cc;
 
-    // all controls
+    // all controls you need to show the features of the custom control
     private Slider slider;
 
-    public DemoPane(PresentationModel pm) {
+    public DemoPane(DemoPM pm) {
         this.pm = pm;
         initializeControls();
         layoutControls();
@@ -50,9 +48,12 @@ public class DemoPane extends BorderPane {
     }
 
     private void setupBindings() {
-        slider.valueProperty().bindBidirectional(pm.valueProperty());
+        //bindings for the "demo controls"
+        slider.valueProperty().bindBidirectional(pm.someValueProperty());
 
-        cc.valueProperty().bindBidirectional(pm.valueProperty());
+
+        //bindings for the Custom Control
+        cc.valueProperty().bindBidirectional(pm.someValueProperty());
     }
 
 }

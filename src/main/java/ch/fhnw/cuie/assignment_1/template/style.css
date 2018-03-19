@@ -1,16 +1,16 @@
-.simpleControl {
+.simple-control {
     -fx-padding: 5;
     -fx-background-color: rgb(12, 12, 12);
     -base-color: rgb(2, 138, 204);
 }
 
-.simpleControl .backgroundCircle {
+.simple-control .background-circle {
     -fx-fill: -base-color;
 }
 
-.simpleControl .display {
-    -fx-font-family: 'DS-Digital';
-    -fx-font-size: 32;
+.simple-control .display {
+    -fx-font-family: 'Lato Light';
+    -fx-font-size: 24;
     -fx-fill: derive(-base-color, 95%);
 }
 
