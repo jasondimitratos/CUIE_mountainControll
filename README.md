@@ -4,7 +4,7 @@
  - Vorname Nachname
  
 ## Abgabe
-- Mittwoch, 28.3.2018, 20:42 Uhr
+- Dienstag, 16.10.2018, 12:00 Uhr
 - Die Abgabe erfolgt durch ein "Push" auf den Master-Branch Ihres GitHub-Repositories.
 
 ## Bitte beachten Sie
@@ -27,7 +27,7 @@
  
 ## Die Aufgabe: Einfaches, interaktives Custom Control
 
-Entwerfen und implementieren Sie ein einfaches, interaktives Custom Control.
+Entwerfen und implementieren Sie ein einfaches, *interaktives* Custom Control.
  - Entwerfen Sie ein interaktives Custom Control mit Hilfe eines Grafik-Programms. 
  - Übertragen Sie den Entwurf in ein Java-Programm und implementieren Sie dieses Custom Control auf Basis JavaFX.
  - Verwenden Sie die im Unterricht besprochene und als Template in diesem Repository mitgelieferte Grundstruktur (das "Template").
@@ -52,3 +52,34 @@ Entwerfen und implementieren Sie ein einfaches, interaktives Custom Control.
  im Unterricht detailliert besprochen wurden (LED, NumberRange, etc.) sind ausgeschlossen. Dagegen können Sie gerne
  ein Control umsetzen, das bereits als Screendump oder als Demo gezeigt wurde.
  
+ 
+ ## Bei Problemen mit dem IntelliJ-Setup
+ Es kommt immer wieder mal vor, dass der Setup des IntelliJ-Projekts nicht auf Anhieb funktioniert oder "plötzlich"
+ nicht mehr funktioniert.
+ 
+ Sie brauchen in so einem Fall NICHT nochmal den Invitation-Link annehmen oder das Projekt via “Check out from Version Control” oder "git clone ..." nochmal anlegen.
+ 
+ Statt dessen ist es am besten den IntelliJ-Setup neu generieren zu lassen. Dazu verwendet man den File "build.gradle", der eine 
+ komplette und IDE-unabhängige Projektbeschreibung enthält.
+ 
+ Die einzelnen Schritte:
+ 
+ - Schliessen Sie alle geöffneten Projekte (File -> Close Project)
+ 
+ - Wählen Sie “OPEN” 
+ 
+ - Es erscheint ein Finder-Fenster mit dem Sie zu ihrem Projekt navigieren.
+ 
+ - Dort wählen Sie den File “build.gradle” aus.
+ 
+ - Beim nächsten Dialog “Open as Project” wählen.
+ 
+ - Beim nächsten Dialog kontrollieren ob Java 10 ausgewählt ist.
+ 
+ - Dann “File already exists” mit YES bestätigen.
+ 
+ - ACHTUNG: Jetzt “Delete existing Project and Import” anklicken.
+ 
+ - Warten, warten, warten.
+ 
+ Wenn alles gut gegangen ist sollte im Project-View der Java-Ordner unter src/main blau sein und der Java-Ordner unter src/test grün.
