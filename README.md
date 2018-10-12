@@ -1,7 +1,8 @@
 # CUIE Assignment 1
 
 ## Bearbeitet von
- - Vorname Nachname
+ - Jason Dimitratos
+ - Cédric Merz
  
 ## Abgabe
 - Dienstag, 16.10.2018, 12:00 Uhr
