@@ -1,7 +1,7 @@
 .simple-control {
-    -fx-padding: 5;
+    -fx-padding: 5;/*
     -fx-background-color: rgb(12, 12, 12);
-    -base-color: rgb(2, 138, 204);
+    -base-color: rgb(2, 138, 204);*/
 }
 
 .simple-control .background-circle {
@@ -14,3 +14,8 @@
     -fx-fill: derive(-base-color, 95%);
 }
 
+.simple-control .background-mountain {
+    -fx-fill: #559a49;
+    -fx-stroke: black;
+    -fx-stroke-width: 3;
+}

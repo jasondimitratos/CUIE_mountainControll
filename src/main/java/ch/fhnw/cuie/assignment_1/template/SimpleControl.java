@@ -1,18 +1,26 @@
 package ch.fhnw.cuie.assignment_1.template;
 
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
+
 
 /**
  * ToDo: CustomControl kurz beschreiben
@@ -36,8 +44,31 @@ public class SimpleControl extends Region {
     private Circle backgroundCircle;
     private Text   display;
 
+
+    private Polygon mountainBackground;
+    private SVGPath mountainBackgroundSnow;
+
+
+//Loading image from URL
+//Image image = new Image(new FileInputStream("url for the image));
+
+    private Line highestAltitude;
+    private Circle highestAltitudeGraber;
+    private Text highestAltitudeText;
+
+    private Line lowestAltitude;
+    private Circle lowestGraber;
+    private Text lowestAltitudeText;
+
+
+    private VBox highestAltBox;
+    private VBox lowestAltBox;
+
+
     // Todo: ersetzen durch alle notwendigen Properties der CustomControl
     private final DoubleProperty value = new SimpleDoubleProperty();
+    private final IntegerProperty maxHeight = new SimpleIntegerProperty();
+    private final IntegerProperty minHeight = new SimpleIntegerProperty();
 
     // needed for resizing
     private Pane drawingPane;
@@ -66,10 +97,17 @@ public class SimpleControl extends Region {
         //ToDo: alle deklarierten Parts initialisieren
         double center = ARTBOARD_WIDTH * 0.5;
 
-        backgroundCircle = new Circle(center, center, center);
-        backgroundCircle.getStyleClass().add("background-circle");
+        //backgroundCircle = new Circle(center, center, center);
+        //backgroundCircle.getStyleClass().add("background-circle");
+        //display = createCenteredText("display");
+        mountainBackground = new Polygon(57, 191, 158.768193, 6, 261, 191);
+        mountainBackgroundSnow = new SVGPath();
+        mountainBackgroundSnow.setContent("M123,76.2851562 C127.119792,87.0403646 133.303385,92.4179688 141.550781,92.4179688 C153.921875,92.4179688 149.368434,86.0488281 159.430934,76.2851562 C164.070716,71.7831625 169.205633,80.0752159 178.855469,81.8007812 C181.723588,82.313653 187.193641,78.6873509 195.265625,70.921875 L159.430934,6 L123,76.2851562 Z");
 
-        display = createCenteredText("display");
+        mountainBackground.getStyleClass().add("background-mountain");
+
+
+
     }
 
     private void initializeDrawingPane() {
@@ -82,7 +120,8 @@ public class SimpleControl extends Region {
 
     private void layoutParts() {
         // ToDo: alle Parts zur drawingPane hinzufügen
-        drawingPane.getChildren().addAll(backgroundCircle, display);
+        //drawingPane.getChildren().addAll(backgroundCircle, display);
+        drawingPane.getChildren().addAll(mountainBackgroundSnow);
 
         getChildren().add(drawingPane);
     }
@@ -97,7 +136,7 @@ public class SimpleControl extends Region {
 
     private void setupBinding() {
         //ToDo dieses Binding ersetzen
-        display.textProperty().bind(valueProperty().asString("%.2f"));
+        //display.textProperty().bind(valueProperty().asString("%.2f"));
     }
 
 
