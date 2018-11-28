@@ -14,8 +14,16 @@
     -fx-fill: derive(-base-color, 95%);
 }
 
-.simple-control .background-mountain {
-    -fx-fill: #559a49;
+.simple-control .background-snow {
+    -fx-fill: #f7f7d3;
     -fx-stroke: black;
     -fx-stroke-width: 3;
+}
+.simple-control .background-bottom {
+    -fx-fill: #559a49;
+    -fx-stroke: black;
+    -fx-stroke-width: 1.5;
+}
+.simple-control .whole-mountain{
+    -fx-background-color: red;
 }

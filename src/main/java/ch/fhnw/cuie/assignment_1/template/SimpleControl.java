@@ -6,10 +6,12 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -24,29 +26,31 @@ import javafx.scene.text.TextBoundsType;
 
 /**
  * ToDo: CustomControl kurz beschreiben
- *
+ * <p>
  * ToDo: Autoren ergänzen / ersetzen
+ *
  * @author Dieter Holz
  */
 //Todo: Umbenennen.
 public class SimpleControl extends Region {
-    private static final double ARTBOARD_WIDTH  = 100;  // Todo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
+    private static final double ARTBOARD_WIDTH = 100;  // Todo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
     private static final double ARTBOARD_HEIGHT = 100;  // Todo: Anpassen an die Breite der Zeichnung
 
     private static final double ASPECT_RATIO = ARTBOARD_WIDTH / ARTBOARD_HEIGHT;
 
-    private static final double MINIMUM_WIDTH  = 25;    // Todo: Anpassen
+    private static final double MINIMUM_WIDTH = 25;    // Todo: Anpassen
     private static final double MINIMUM_HEIGHT = MINIMUM_WIDTH / ASPECT_RATIO;
 
     private static final double MAXIMUM_WIDTH = 800;    // Todo: Anpassen
 
-    // Todo: diese Parts durch alle notwendigen Parts der gewünschten CustomControl ersetzen
-    private Circle backgroundCircle;
-    private Text   display;
+
+    private double liftHeight = 30;
+    private double talstationHeight = 80;
 
 
-    private Polygon mountainBackground;
+
     private SVGPath mountainBackgroundSnow;
+    private SVGPath mountainBackgroundBottom;
 
 
 //Loading image from URL
@@ -54,15 +58,12 @@ public class SimpleControl extends Region {
 
     private Line highestAltitude;
     private Circle highestAltitudeGraber;
-    private Text highestAltitudeText;
-
     private Line lowestAltitude;
     private Circle lowestGraber;
-    private Text lowestAltitudeText;
 
-
-    private VBox highestAltBox;
-    private VBox lowestAltBox;
+    private VBox backgroundMountain;
+    private HBox highestAltBox;
+    private HBox lowestAltBox;
 
 
     // Todo: ersetzen durch alle notwendigen Properties der CustomControl
@@ -97,16 +98,56 @@ public class SimpleControl extends Region {
         //ToDo: alle deklarierten Parts initialisieren
         double center = ARTBOARD_WIDTH * 0.5;
 
-        //backgroundCircle = new Circle(center, center, center);
-        //backgroundCircle.getStyleClass().add("background-circle");
-        //display = createCenteredText("display");
-        mountainBackground = new Polygon(57, 191, 158.768193, 6, 261, 191);
+        initializeBackgroundMountain();
+initializeAltBox();
+        //mountainBackground.getStyleClass().add("background-mountain");
+
+
+    }
+
+    private void initializeBackgroundMountain() {
+        backgroundMountain = new VBox();
         mountainBackgroundSnow = new SVGPath();
         mountainBackgroundSnow.setContent("M123,76.2851562 C127.119792,87.0403646 133.303385,92.4179688 141.550781,92.4179688 C153.921875,92.4179688 149.368434,86.0488281 159.430934,76.2851562 C164.070716,71.7831625 169.205633,80.0752159 178.855469,81.8007812 C181.723588,82.313653 187.193641,78.6873509 195.265625,70.921875 L159.430934,6 L123,76.2851562 Z");
+        mountainBackgroundSnow.getStyleClass().add("background-snow");
+        mountainBackgroundBottom = new SVGPath();
+        mountainBackgroundBottom.setContent("M123,76.2851562 C127.119792,87.0403646 133.303385,92.4179687 141.550781,92.4179687 C153.921875,92.4179687 149.368434,86.0488281 159.430934,76.2851562 C164.070716,71.7831625 169.205633,80.0752159 178.855469,81.8007812 C181.723588,82.313653 187.193641,78.6873509 195.265625,70.921875 C239.088542,151.829148 261,192.282785 261,192.282785 C261,192.282785 193.428515,191.85519 58.285545,191 L123,76.2851562 Z");
+        mountainBackgroundBottom.getStyleClass().add("background-bottom");
+        backgroundMountain.getChildren().add(mountainBackgroundSnow);
+        backgroundMountain.getChildren().add(mountainBackgroundBottom);
+        backgroundMountain.setSpacing(-25);
+        backgroundMountain.setAlignment(Pos.CENTER);
+        backgroundMountain.getStyleClass().add("whole-mountain");
+        backgroundMountain.setLayoutX(0);
+        backgroundMountain.setLayoutY(0);
 
-        mountainBackground.getStyleClass().add("background-mountain");
+    }
+
+    private void initializeAltBox(){
+        highestAltBox = new HBox();
+        highestAltitude = new Line(0,50,100,50);
+        highestAltitudeGraber = new Circle(10f);
+        highestAltitude.getStrokeDashArray().addAll(10d, 7d, 5d, 7d);
+        highestAltBox.getChildren().add(highestAltitude);
+        highestAltitude.getStyleClass().add("altitude-line");
+        highestAltBox.getChildren().add(highestAltitudeGraber);
+        highestAltBox.setAlignment(Pos.CENTER);
+        highestAltBox.setLayoutX(50);
+        highestAltBox.setLayoutY(liftHeight);
+        highestAltitudeGraber.getStyleClass().add("altitude-graber");
 
 
+        lowestAltBox = new HBox();
+        lowestAltitude = new Line(0,50,100,50);
+        lowestAltitude.getStrokeDashArray().addAll(10d, 7d, 5d, 7d);
+        lowestGraber = new Circle(10);
+        lowestAltitude.getStyleClass().add("altitude-line");
+        lowestGraber.getStyleClass().add("altitude-graber");
+        lowestAltBox.getChildren().add(lowestAltitude);
+        lowestAltBox.getChildren().add(lowestGraber);
+        lowestAltBox.setAlignment(Pos.CENTER);
+        lowestAltBox.setLayoutX(50);
+        lowestAltBox.setLayoutY(talstationHeight);
 
     }
 
@@ -121,7 +162,7 @@ public class SimpleControl extends Region {
     private void layoutParts() {
         // ToDo: alle Parts zur drawingPane hinzufügen
         //drawingPane.getChildren().addAll(backgroundCircle, display);
-        drawingPane.getChildren().addAll(mountainBackgroundSnow);
+        drawingPane.getChildren().addAll(backgroundMountain, highestAltBox, lowestAltBox);
 
         getChildren().add(drawingPane);
     }
@@ -136,7 +177,7 @@ public class SimpleControl extends Region {
 
     private void setupBinding() {
         //ToDo dieses Binding ersetzen
-        //display.textProperty().bind(valueProperty().asString("%.2f"));
+
     }
 
 
@@ -148,8 +189,8 @@ public class SimpleControl extends Region {
     }
 
     private void resize() {
-        Insets padding         = getPadding();
-        double availableWidth  = getWidth() - padding.getLeft() - padding.getRight();
+        Insets padding = getPadding();
+        double availableWidth = getWidth() - padding.getLeft() - padding.getRight();
         double availableHeight = getHeight() - padding.getTop() - padding.getBottom();
 
         double width = Math.max(Math.min(Math.min(availableWidth, availableHeight * ASPECT_RATIO), MAXIMUM_WIDTH), MINIMUM_WIDTH);
@@ -167,7 +208,7 @@ public class SimpleControl extends Region {
 
     //ToDo: diese Funktionen anschauen und für die Umsetzung des CustomControls benutzen
 
-    private double percentageToValue(double percentage, double minValue, double maxValue){
+    private double percentageToValue(double percentage, double minValue, double maxValue) {
         return ((maxValue - minValue) * percentage) + minValue;
     }
 
@@ -179,17 +220,17 @@ public class SimpleControl extends Region {
         return percentageToAngle(valueToPercentage(value, minValue, maxValue));
     }
 
-    private double mousePositionToValue(double mouseX, double mouseY, double cx, double cy, double minValue, double maxValue){
+    private double mousePositionToValue(double mouseX, double mouseY, double cx, double cy, double minValue, double maxValue) {
         double percentage = angleToPercentage(angle(cx, cy, mouseX, mouseY));
 
         return percentageToValue(percentage, minValue, maxValue);
     }
 
-    private double angleToPercentage(double angle){
+    private double angleToPercentage(double angle) {
         return angle / 360.0;
     }
 
-    private double percentageToAngle(double percentage){
+    private double percentageToAngle(double percentage) {
         return 360.0 * percentage;
     }
 
@@ -197,16 +238,16 @@ public class SimpleControl extends Region {
         double deltaX = x - cx;
         double deltaY = y - cy;
         double radius = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
-        double nx     = deltaX / radius;
-        double ny     = deltaY / radius;
-        double theta  = Math.toRadians(90) + Math.atan2(ny, nx);
+        double nx = deltaX / radius;
+        double ny = deltaY / radius;
+        double theta = Math.toRadians(90) + Math.atan2(ny, nx);
 
         return Double.compare(theta, 0.0) >= 0 ? Math.toDegrees(theta) : Math.toDegrees((theta)) + 360.0;
     }
 
     private Point2D pointOnCircle(double cX, double cY, double radius, double angle) {
         return new Point2D(cX - (radius * Math.sin(Math.toRadians(angle - 180))),
-                           cY + (radius * Math.cos(Math.toRadians(angle - 180))));
+                cY + (radius * Math.cos(Math.toRadians(angle - 180))));
     }
 
     private Text createCenteredText(String styleClass) {
@@ -231,16 +272,16 @@ public class SimpleControl extends Region {
         Group group = new Group();
 
         double degreesBetweenTicks = overallAngle == 360 ?
-                                     overallAngle /numberOfTicks :
-                                     overallAngle /(numberOfTicks - 1);
-        double outerRadius         = Math.min(cx, cy) - indent;
-        double innerRadius         = Math.min(cx, cy) - indent - tickLength;
+                overallAngle / numberOfTicks :
+                overallAngle / (numberOfTicks - 1);
+        double outerRadius = Math.min(cx, cy) - indent;
+        double innerRadius = Math.min(cx, cy) - indent - tickLength;
 
         for (int i = 0; i < numberOfTicks; i++) {
             double angle = 180 + startingAngle + i * degreesBetweenTicks;
 
             Point2D startPoint = pointOnCircle(cx, cy, outerRadius, angle);
-            Point2D endPoint   = pointOnCircle(cx, cy, innerRadius, angle);
+            Point2D endPoint = pointOnCircle(cx, cy, innerRadius, angle);
 
             Line tick = new Line(startPoint.getX(), startPoint.getY(), endPoint.getX(), endPoint.getY());
             tick.getStyleClass().add(styleClass);
@@ -254,7 +295,7 @@ public class SimpleControl extends Region {
 
     @Override
     protected double computeMinWidth(double height) {
-        Insets padding           = getPadding();
+        Insets padding = getPadding();
         double horizontalPadding = padding.getLeft() + padding.getRight();
 
         return MINIMUM_WIDTH + horizontalPadding;
@@ -262,7 +303,7 @@ public class SimpleControl extends Region {
 
     @Override
     protected double computeMinHeight(double width) {
-        Insets padding         = getPadding();
+        Insets padding = getPadding();
         double verticalPadding = padding.getTop() + padding.getBottom();
 
         return MINIMUM_HEIGHT + verticalPadding;
@@ -270,7 +311,7 @@ public class SimpleControl extends Region {
 
     @Override
     protected double computePrefWidth(double height) {
-        Insets padding           = getPadding();
+        Insets padding = getPadding();
         double horizontalPadding = padding.getLeft() + padding.getRight();
 
         return ARTBOARD_WIDTH + horizontalPadding;
@@ -278,7 +319,7 @@ public class SimpleControl extends Region {
 
     @Override
     protected double computePrefHeight(double width) {
-        Insets padding         = getPadding();
+        Insets padding = getPadding();
         double verticalPadding = padding.getTop() + padding.getBottom();
 
         return ARTBOARD_HEIGHT + verticalPadding;
