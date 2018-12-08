@@ -1,9 +1,6 @@
 package ch.fhnw.cuie.assignment_1.template;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
@@ -44,17 +41,14 @@ public class MountainControl extends Region {
     private static final double MAXIMUM_WIDTH = 800;    // Todo: Anpassen
 
 
-    private double liftHeight = 30;
-    private double talstationHeight = 80;
+    private int liftHeight = 30;
+    private int talstationHeight = 80;
 
-
+    private StringProperty liftHeightPoint = new SimpleStringProperty();
+    private StringProperty talstationPoint = new SimpleStringProperty();
 
     private SVGPath mountainBackgroundSnow;
     private SVGPath mountainBackgroundBottom;
-
-
-//Loading image from URL
-//Image image = new Image(new FileInputStream("url for the image));
 
     private Line highestAltitude;
     private Circle highestAltitudeGraber;
@@ -65,11 +59,6 @@ public class MountainControl extends Region {
     private HBox highestAltBox;
     private HBox lowestAltBox;
 
-
-    // Todo: ersetzen durch alle notwendigen Properties der CustomControl
-    private final DoubleProperty value = new SimpleDoubleProperty();
-    private final IntegerProperty maxHeight = new SimpleIntegerProperty();
-    private final IntegerProperty minHeight = new SimpleIntegerProperty();
 
     // needed for resizing
     private Pane drawingPane;
@@ -167,17 +156,32 @@ initializeAltBox();
         getChildren().add(drawingPane);
     }
 
-    private void setupEventHandlers() {
-        //ToDo: bei Bedarf ergänzen
+    private void setupEventHandlers(){
+        // ToDo: meow
     }
 
-    private void setupValueChangeListeners() {
-        //ToDo: bei Bedarf ergänzen
+    private void setupValueChangeListeners(){
+        liftHeightPointProperty().addListener(((observable, oldValue, newValue) -> {
+            liftHeight = getInt(newValue);
+            System.out.println("liftHeight: " + liftHeight);
+        }));
+
+        talstationPointProperty().addListener(((observable, oldValue, newValue) -> {
+            talstationHeight = getInt(newValue);
+            System.out.println("talstationHeight: " + talstationHeight);
+        }));
+    }
+
+    public int getInt(String test){
+        try {
+            return Integer.parseInt(test.trim());
+        } catch (Exception e){
+            return 0;
+        }
     }
 
     private void setupBinding() {
         //ToDo dieses Binding ersetzen
-
     }
 
 
@@ -239,16 +243,28 @@ initializeAltBox();
 
     // alle getter und setter  (generiert via "Code -> Generate... -> Getter and Setter)
 
-    // ToDo: ersetzen durch die Getter und Setter Ihres CustomControls
-    public double getValue() {
-        return value.get();
+
+    public String getLiftHeightPoint() {
+        return liftHeightPoint.get();
     }
 
-    public DoubleProperty valueProperty() {
-        return value;
+    public StringProperty liftHeightPointProperty() {
+        return liftHeightPoint;
     }
 
-    public void setValue(double value) {
-        this.value.set(value);
+    public void setLiftHeightPoint(String liftHeightPoint) {
+        this.liftHeightPoint.set(liftHeightPoint);
+    }
+
+    public String getTalstationPoint() {
+        return talstationPoint.get();
+    }
+
+    public StringProperty talstationPointProperty() {
+        return talstationPoint;
+    }
+
+    public void setTalstationPoint(String talstationPoint) {
+        this.talstationPoint.set(talstationPoint);
     }
 }

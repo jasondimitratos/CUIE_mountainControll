@@ -7,38 +7,15 @@ import javafx.beans.property.*;
  */
 public class DemoPM {
     // all the properties waiting for being displayed
-    private final StringProperty demoTitle = new SimpleStringProperty("Custom Control Demo");
-    private final DoubleProperty someValue = new SimpleDoubleProperty();
+    private final StringProperty demoTitle = new SimpleStringProperty("Mountain Control Demo");
+    private final StringProperty liftPoint = new SimpleStringProperty();
+    private final StringProperty talstationPoint = new SimpleStringProperty();
 
-
-    private final IntegerProperty highestPoint = new SimpleIntegerProperty();
-    private final IntegerProperty lowestPoint = new SimpleIntegerProperty();
-
-
-
-    // all getters and setters (generated via "Code -> Generate -> Getter and Setter)
-
-    public String getDemoTitle() {
-        return demoTitle.get();
-    }
-
+    // getters and setters
     public StringProperty demoTitleProperty() {
         return demoTitle;
     }
+    public StringProperty liftPointProperty() { return liftPoint; }
+    public StringProperty talstationPointProperty() { return talstationPoint; }
 
-    public void setDemoTitle(String demoTitle) {
-        this.demoTitle.set(demoTitle);
-    }
-
-    public double getSomeValue() {
-        return someValue.get();
-    }
-
-    public DoubleProperty someValueProperty() {
-        return someValue;
-    }
-
-    public void setSomeValue(double someValue) {
-        this.someValue.set(someValue);
-    }
 }

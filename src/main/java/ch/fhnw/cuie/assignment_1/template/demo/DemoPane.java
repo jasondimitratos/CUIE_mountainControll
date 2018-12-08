@@ -16,11 +16,11 @@ public class DemoPane extends BorderPane {
     private final DemoPM pm;
 
     // declare the custom control
-    private MountainControl cc;
+    private MountainControl mc;
 
     // all controls you need to show the features of the custom control
-    private TextField maxField;
-    private TextField minField;
+    private TextField liftField;
+    private TextField talstationField;
 
     public DemoPane(DemoPM pm) {
         this.pm = pm;
@@ -32,33 +32,29 @@ public class DemoPane extends BorderPane {
     private void initializeControls() {
         setPadding(new Insets(10));
 
-        cc = new MountainControl();
+        mc = new MountainControl();
 
-        maxField = new TextField();
-        minField = new TextField();
+        liftField = new TextField();
+        talstationField = new TextField();
     }
 
     private void layoutControls() {
         VBox controlPane = new VBox(
-                new Label("Talstation (m.ü.M."),
-                maxField,
-                new Label("Bergstation (m.ü.M."),
-                minField
+                new Label("Bergstation (m.ü.M."), liftField,
+                new Label("Talstation (m.ü.M."), talstationField
         );
         controlPane.setPadding(new Insets(0, 50, 0, 50));
         controlPane.setSpacing(10);
 
-        setCenter(cc);
+        setCenter(mc);
         setRight(controlPane);
     }
 
     private void setupBindings() {
-        //bindings for the "demo controls"
-        //slider.valueProperty().bindBidirectional(pm.someValueProperty());
+        liftField.textProperty().bindBidirectional(pm.liftPointProperty());
+        talstationField.textProperty().bindBidirectional(pm.talstationPointProperty());
 
-
-        //bindings for the Custom Control
-        cc.valueProperty().bindBidirectional(pm.someValueProperty());
+        pm.liftPointProperty().bindBidirectional(mc.liftHeightPointProperty());
+        pm.talstationPointProperty().bindBidirectional(mc.talstationPointProperty());
     }
-
 }
