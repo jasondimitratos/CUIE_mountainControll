@@ -10,6 +10,7 @@ import ch.fhnw.cuie.assignment_1.template.SimpleControl;
 
 /**
  * @author Dieter Holz
+ * Hallo
  */
 public class DemoPane extends BorderPane {
 
