@@ -3,6 +3,7 @@ package ch.fhnw.cuie.assignment_1.template.demo;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
@@ -10,7 +11,6 @@ import ch.fhnw.cuie.assignment_1.template.SimpleControl;
 
 /**
  * @author Dieter Holz
- * Hallo
  */
 public class DemoPane extends BorderPane {
 
@@ -20,7 +20,8 @@ public class DemoPane extends BorderPane {
     private SimpleControl cc;
 
     // all controls you need to show the features of the custom control
-    private Slider slider;
+    private TextField maxField;
+    private TextField minField;
 
     public DemoPane(DemoPM pm) {
         this.pm = pm;
@@ -34,13 +35,17 @@ public class DemoPane extends BorderPane {
 
         cc = new SimpleControl();
 
-        slider = new Slider();
-        slider.setShowTickLabels(true);
+        maxField = new TextField();
+        minField = new TextField();
     }
 
     private void layoutControls() {
-        VBox controlPane = new VBox(new Label("SimpleControl Properties"),
-                                    slider);
+        VBox controlPane = new VBox(
+                new Label("Talstation (m.ü.M."),
+                maxField,
+                new Label("Bergstation (m.ü.M."),
+                minField
+        );
         controlPane.setPadding(new Insets(0, 50, 0, 50));
         controlPane.setSpacing(10);
 
@@ -50,7 +55,7 @@ public class DemoPane extends BorderPane {
 
     private void setupBindings() {
         //bindings for the "demo controls"
-        slider.valueProperty().bindBidirectional(pm.someValueProperty());
+        //slider.valueProperty().bindBidirectional(pm.someValueProperty());
 
 
         //bindings for the Custom Control
