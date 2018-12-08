@@ -11,8 +11,8 @@ public class DemoPM {
     private final DoubleProperty someValue = new SimpleDoubleProperty();
 
 
-    private final IntegerProperty highestPoint = new SimpleIntegerProperty();
-    private final IntegerProperty lowestPoint = new SimpleIntegerProperty();
+    private final IntegerProperty maxPoint = new SimpleIntegerProperty();
+    private final IntegerProperty minPoint = new SimpleIntegerProperty();
 
 
 
@@ -40,5 +40,29 @@ public class DemoPM {
 
     public void setSomeValue(double someValue) {
         this.someValue.set(someValue);
+    }
+
+    public int getMaxPoint() {
+        return maxPoint.get();
+    }
+
+    public IntegerProperty maxPointProperty() {
+        return maxPoint;
+    }
+
+    public void setMaxPoint(int maxPoint) {
+        this.maxPoint.set(maxPoint);
+    }
+
+    public int getMinPoint() {
+        return minPoint.get();
+    }
+
+    public IntegerProperty minPointProperty() {
+        return minPoint;
+    }
+
+    public void setMinPoint(int minPoint) {
+        this.minPoint.set(minPoint);
     }
 }

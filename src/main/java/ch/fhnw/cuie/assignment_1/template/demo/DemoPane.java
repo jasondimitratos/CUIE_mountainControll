@@ -16,7 +16,7 @@ public class DemoPane extends BorderPane {
     private final DemoPM pm;
 
     // declare the custom control
-    private MountainControl cc;
+    private MountainControl mc;
 
     // all controls you need to show the features of the custom control
     private TextField maxField;
@@ -32,7 +32,7 @@ public class DemoPane extends BorderPane {
     private void initializeControls() {
         setPadding(new Insets(10));
 
-        cc = new MountainControl();
+        mc = new MountainControl();
 
         maxField = new TextField();
         minField = new TextField();
@@ -48,17 +48,18 @@ public class DemoPane extends BorderPane {
         controlPane.setPadding(new Insets(0, 50, 0, 50));
         controlPane.setSpacing(10);
 
-        setCenter(cc);
+        setCenter(mc);
         setRight(controlPane);
     }
 
     private void setupBindings() {
         //bindings for the "demo controls"
-        //slider.valueProperty().bindBidirectional(pm.someValueProperty());
+        //maxField.textProperty().bindBidirectional(pm.maxPoint());
+        //minField.textProperty().bindBidirectional(pm.minPoint());
 
 
         //bindings for the Custom Control
-        cc.valueProperty().bindBidirectional(pm.someValueProperty());
+        mc.valueProperty().bindBidirectional(pm.someValueProperty());
     }
 
 }
