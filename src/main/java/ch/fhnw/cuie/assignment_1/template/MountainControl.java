@@ -41,11 +41,11 @@ public class MountainControl extends Region {
     private static final double MAXIMUM_WIDTH = 800;    // Todo: Anpassen
 
 
-    private double liftHeight = 30;
-    private double talstationHeight = 80;
+    private int liftHeight = 30;
+    private int talstationHeight = 80;
 
-    private StringProperty maxPoint = new SimpleStringProperty();
-    private StringProperty minPoint = new SimpleStringProperty();
+    private StringProperty liftHeightPoint = new SimpleStringProperty();
+    private StringProperty talstationPoint = new SimpleStringProperty();
 
     private SVGPath mountainBackgroundSnow;
     private SVGPath mountainBackgroundBottom;
@@ -161,13 +161,23 @@ initializeAltBox();
     }
 
     private void setupValueChangeListeners(){
-        maxPointProperty().addListener(((observable, oldValue, newValue) -> {
-            System.out.println("max: " + newValue);
+        liftHeightPointProperty().addListener(((observable, oldValue, newValue) -> {
+            liftHeight = getInt(newValue);
+            System.out.println("liftHeight: " + liftHeight);
         }));
 
-        minPointProperty().addListener(((observable, oldValue, newValue) -> {
-            System.out.println("min: " + newValue);
+        talstationPointProperty().addListener(((observable, oldValue, newValue) -> {
+            talstationHeight = getInt(newValue);
+            System.out.println("talstationHeight: " + talstationHeight);
         }));
+    }
+
+    public int getInt(String test){
+        try {
+            return Integer.parseInt(test.trim());
+        } catch (Exception e){
+            return 0;
+        }
     }
 
     private void setupBinding() {
@@ -233,27 +243,28 @@ initializeAltBox();
 
     // alle getter und setter  (generiert via "Code -> Generate... -> Getter and Setter)
 
-    public String getMaxPoint() {
-        return maxPoint.get();
+
+    public String getLiftHeightPoint() {
+        return liftHeightPoint.get();
     }
 
-    public StringProperty maxPointProperty() {
-        return maxPoint;
+    public StringProperty liftHeightPointProperty() {
+        return liftHeightPoint;
     }
 
-    public void setMaxPoint(String maxPoint) {
-        this.maxPoint.set(maxPoint);
+    public void setLiftHeightPoint(String liftHeightPoint) {
+        this.liftHeightPoint.set(liftHeightPoint);
     }
 
-    public String getMinPoint() {
-        return minPoint.get();
+    public String getTalstationPoint() {
+        return talstationPoint.get();
     }
 
-    public StringProperty minPointProperty() {
-        return minPoint;
+    public StringProperty talstationPointProperty() {
+        return talstationPoint;
     }
 
-    public void setMinPoint(String minPoint) {
-        this.minPoint.set(minPoint);
+    public void setTalstationPoint(String talstationPoint) {
+        this.talstationPoint.set(talstationPoint);
     }
 }

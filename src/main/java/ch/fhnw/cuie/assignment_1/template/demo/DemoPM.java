@@ -8,25 +8,14 @@ import javafx.beans.property.*;
 public class DemoPM {
     // all the properties waiting for being displayed
     private final StringProperty demoTitle = new SimpleStringProperty("Mountain Control Demo");
-    private final StringProperty maxPoint = new SimpleStringProperty();
-    private final StringProperty minPoint = new SimpleStringProperty();
+    private final StringProperty liftPoint = new SimpleStringProperty();
+    private final StringProperty talstationPoint = new SimpleStringProperty();
 
     // getters and setters
     public StringProperty demoTitleProperty() {
         return demoTitle;
     }
-    public StringProperty maxPointProperty() { return maxPoint; }
-    public StringProperty minPointProperty() { return minPoint; }
+    public StringProperty liftPointProperty() { return liftPoint; }
+    public StringProperty talstationPointProperty() { return talstationPoint; }
 
-    public void setDemoTitle(String demoTitle) {
-        this.demoTitle.set(demoTitle);
-    }
-
-    public void setMaxPoint(String maxPoint) {
-        this.maxPoint.set(maxPoint);
-    }
-
-    public void setMinPoint(String minPoint) {
-        this.minPoint.set(minPoint);
-    }
 }
