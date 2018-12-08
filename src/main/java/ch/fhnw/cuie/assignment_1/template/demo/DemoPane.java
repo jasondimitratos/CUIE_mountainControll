@@ -2,12 +2,11 @@ package ch.fhnw.cuie.assignment_1.template.demo;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-import ch.fhnw.cuie.assignment_1.template.SimpleControl;
+import ch.fhnw.cuie.assignment_1.template.MountainControl;
 
 /**
  * @author Dieter Holz
@@ -17,7 +16,7 @@ public class DemoPane extends BorderPane {
     private final DemoPM pm;
 
     // declare the custom control
-    private SimpleControl cc;
+    private MountainControl cc;
 
     // all controls you need to show the features of the custom control
     private TextField maxField;
@@ -33,7 +32,7 @@ public class DemoPane extends BorderPane {
     private void initializeControls() {
         setPadding(new Insets(10));
 
-        cc = new SimpleControl();
+        cc = new MountainControl();
 
         maxField = new TextField();
         minField = new TextField();

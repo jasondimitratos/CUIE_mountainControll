@@ -32,7 +32,7 @@ import javafx.scene.text.TextBoundsType;
  * @author Dieter Holz
  */
 //Todo: Umbenennen.
-public class SimpleControl extends Region {
+public class MountainControl extends Region {
     private static final double ARTBOARD_WIDTH = 100;  // Todo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
     private static final double ARTBOARD_HEIGHT = 100;  // Todo: Anpassen an die Breite der Zeichnung
 
@@ -74,7 +74,7 @@ public class SimpleControl extends Region {
     // needed for resizing
     private Pane drawingPane;
 
-    public SimpleControl() {
+    public MountainControl() {
         initializeSelf();
         initializeParts();
         initializeDrawingPane();
