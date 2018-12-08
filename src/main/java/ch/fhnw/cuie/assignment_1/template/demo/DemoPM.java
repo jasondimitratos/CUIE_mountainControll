@@ -7,62 +7,26 @@ import javafx.beans.property.*;
  */
 public class DemoPM {
     // all the properties waiting for being displayed
-    private final StringProperty demoTitle = new SimpleStringProperty("Custom Control Demo");
-    private final DoubleProperty someValue = new SimpleDoubleProperty();
+    private final StringProperty demoTitle = new SimpleStringProperty("Mountain Control Demo");
+    private final StringProperty maxPoint = new SimpleStringProperty();
+    private final StringProperty minPoint = new SimpleStringProperty();
 
-
-    private final IntegerProperty maxPoint = new SimpleIntegerProperty();
-    private final IntegerProperty minPoint = new SimpleIntegerProperty();
-
-
-
-    // all getters and setters (generated via "Code -> Generate -> Getter and Setter)
-
-    public String getDemoTitle() {
-        return demoTitle.get();
-    }
-
+    // getters and setters
     public StringProperty demoTitleProperty() {
         return demoTitle;
     }
+    public StringProperty maxPointProperty() { return maxPoint; }
+    public StringProperty minPointProperty() { return minPoint; }
 
     public void setDemoTitle(String demoTitle) {
         this.demoTitle.set(demoTitle);
     }
 
-    public double getSomeValue() {
-        return someValue.get();
-    }
-
-    public DoubleProperty someValueProperty() {
-        return someValue;
-    }
-
-    public void setSomeValue(double someValue) {
-        this.someValue.set(someValue);
-    }
-
-    public int getMaxPoint() {
-        return maxPoint.get();
-    }
-
-    public IntegerProperty maxPointProperty() {
-        return maxPoint;
-    }
-
-    public void setMaxPoint(int maxPoint) {
+    public void setMaxPoint(String maxPoint) {
         this.maxPoint.set(maxPoint);
     }
 
-    public int getMinPoint() {
-        return minPoint.get();
-    }
-
-    public IntegerProperty minPointProperty() {
-        return minPoint;
-    }
-
-    public void setMinPoint(int minPoint) {
+    public void setMinPoint(String minPoint) {
         this.minPoint.set(minPoint);
     }
 }

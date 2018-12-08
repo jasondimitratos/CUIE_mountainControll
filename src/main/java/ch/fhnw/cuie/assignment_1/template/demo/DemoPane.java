@@ -40,10 +40,8 @@ public class DemoPane extends BorderPane {
 
     private void layoutControls() {
         VBox controlPane = new VBox(
-                new Label("Talstation (m.ü.M."),
-                maxField,
-                new Label("Bergstation (m.ü.M."),
-                minField
+            new Label("Talstation (m.ü.M."), maxField,
+            new Label("Bergstation (m.ü.M."), minField
         );
         controlPane.setPadding(new Insets(0, 50, 0, 50));
         controlPane.setSpacing(10);
@@ -53,13 +51,8 @@ public class DemoPane extends BorderPane {
     }
 
     private void setupBindings() {
-        //bindings for the "demo controls"
-        //maxField.textProperty().bindBidirectional(pm.maxPoint());
-        //minField.textProperty().bindBidirectional(pm.minPoint());
-
-
-        //bindings for the Custom Control
-        mc.valueProperty().bindBidirectional(pm.someValueProperty());
+        maxField.textProperty().bindBidirectional(pm.maxPointProperty());
+        minField.textProperty().bindBidirectional(pm.minPointProperty());
     }
 
 }
