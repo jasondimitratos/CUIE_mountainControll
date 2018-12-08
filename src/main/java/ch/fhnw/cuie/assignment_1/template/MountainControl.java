@@ -1,9 +1,6 @@
 package ch.fhnw.cuie.assignment_1.template;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
@@ -47,14 +44,11 @@ public class MountainControl extends Region {
     private double liftHeight = 30;
     private double talstationHeight = 80;
 
-
+    private StringProperty maxPoint = new SimpleStringProperty();
+    private StringProperty minPoint = new SimpleStringProperty();
 
     private SVGPath mountainBackgroundSnow;
     private SVGPath mountainBackgroundBottom;
-
-
-//Loading image from URL
-//Image image = new Image(new FileInputStream("url for the image));
 
     private Line highestAltitude;
     private Circle highestAltitudeGraber;
@@ -65,11 +59,6 @@ public class MountainControl extends Region {
     private HBox highestAltBox;
     private HBox lowestAltBox;
 
-
-    // Todo: ersetzen durch alle notwendigen Properties der CustomControl
-    private final DoubleProperty value = new SimpleDoubleProperty();
-    private final IntegerProperty maxHeight = new SimpleIntegerProperty();
-    private final IntegerProperty minHeight = new SimpleIntegerProperty();
 
     // needed for resizing
     private Pane drawingPane;
@@ -167,17 +156,22 @@ initializeAltBox();
         getChildren().add(drawingPane);
     }
 
-    private void setupEventHandlers() {
-        //ToDo: bei Bedarf ergänzen
+    private void setupEventHandlers(){
+        // ToDo: meow
     }
 
-    private void setupValueChangeListeners() {
-        //ToDo: bei Bedarf ergänzen
+    private void setupValueChangeListeners(){
+        maxPointProperty().addListener(((observable, oldValue, newValue) -> {
+            System.out.println("max: " + newValue);
+        }));
+
+        minPointProperty().addListener(((observable, oldValue, newValue) -> {
+            System.out.println("min: " + newValue);
+        }));
     }
 
     private void setupBinding() {
         //ToDo dieses Binding ersetzen
-
     }
 
 
@@ -239,16 +233,27 @@ initializeAltBox();
 
     // alle getter und setter  (generiert via "Code -> Generate... -> Getter and Setter)
 
-    // ToDo: ersetzen durch die Getter und Setter Ihres CustomControls
-    public double getValue() {
-        return value.get();
+    public String getMaxPoint() {
+        return maxPoint.get();
     }
 
-    public DoubleProperty valueProperty() {
-        return value;
+    public StringProperty maxPointProperty() {
+        return maxPoint;
     }
 
-    public void setValue(double value) {
-        this.value.set(value);
+    public void setMaxPoint(String maxPoint) {
+        this.maxPoint.set(maxPoint);
+    }
+
+    public String getMinPoint() {
+        return minPoint.get();
+    }
+
+    public StringProperty minPointProperty() {
+        return minPoint;
+    }
+
+    public void setMinPoint(String minPoint) {
+        this.minPoint.set(minPoint);
     }
 }

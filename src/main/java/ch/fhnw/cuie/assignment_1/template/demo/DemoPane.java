@@ -53,6 +53,8 @@ public class DemoPane extends BorderPane {
     private void setupBindings() {
         maxField.textProperty().bindBidirectional(pm.maxPointProperty());
         minField.textProperty().bindBidirectional(pm.minPointProperty());
-    }
 
+        pm.maxPointProperty().bindBidirectional(mc.maxPointProperty());
+        pm.minPointProperty().bindBidirectional(mc.minPointProperty());
+    }
 }
