@@ -4,6 +4,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
@@ -11,6 +12,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -24,6 +26,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
 
 
+
 /**
  * ToDo: CustomControl kurz beschreiben
  * <p>
@@ -33,8 +36,8 @@ import javafx.scene.text.TextBoundsType;
  */
 //Todo: Umbenennen.
 public class MountainControl extends Region {
-    private static final double ARTBOARD_WIDTH = 100;  // Todo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
-    private static final double ARTBOARD_HEIGHT = 100;  // Todo: Anpassen an die Breite der Zeichnung
+    private static final double ARTBOARD_WIDTH = 50;  // Todo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
+    private static final double ARTBOARD_HEIGHT = 50;  // Todo: Anpassen an die Breite der Zeichnung
 
     private static final double ASPECT_RATIO = ARTBOARD_WIDTH / ARTBOARD_HEIGHT;
 
@@ -45,8 +48,7 @@ public class MountainControl extends Region {
 
 
     private double liftHeight = 30;
-    private double talstationHeight = 80;
-
+    private double talstationHeight = 100;
 
 
     private SVGPath mountainBackgroundSnow;
@@ -99,7 +101,7 @@ public class MountainControl extends Region {
         double center = ARTBOARD_WIDTH * 0.5;
 
         initializeBackgroundMountain();
-initializeAltBox();
+        initializeAltBox();
         //mountainBackground.getStyleClass().add("background-mountain");
 
 
@@ -120,34 +122,40 @@ initializeAltBox();
         backgroundMountain.getStyleClass().add("whole-mountain");
         backgroundMountain.setLayoutX(0);
         backgroundMountain.setLayoutY(0);
+        backgroundMountain.setPrefSize(ARTBOARD_WIDTH, ARTBOARD_HEIGHT);
 
     }
 
-    private void initializeAltBox(){
+    private void initializeAltBox() {
         highestAltBox = new HBox();
-        highestAltitude = new Line(0,50,100,50);
+        highestAltitude = new Line(0, 50, 100, 50);
         highestAltitudeGraber = new Circle(10f);
         highestAltitude.getStrokeDashArray().addAll(10d, 7d, 5d, 7d);
         highestAltBox.getChildren().add(highestAltitude);
         highestAltitude.getStyleClass().add("altitude-line");
         highestAltBox.getChildren().add(highestAltitudeGraber);
         highestAltBox.setAlignment(Pos.CENTER);
-        highestAltBox.setLayoutX(50);
+        highestAltBox.setLayoutX(ARTBOARD_WIDTH);
         highestAltBox.setLayoutY(liftHeight);
         highestAltitudeGraber.getStyleClass().add("altitude-graber");
+        highestAltBox.setPrefWidth(ARTBOARD_WIDTH);
+        highestAltBox.getStyleClass().add("highest-altitude-Box");
 
 
         lowestAltBox = new HBox();
-        lowestAltitude = new Line(0,50,100,50);
+        lowestAltitude = new Line(0, 50, 100, 50);
         lowestAltitude.getStrokeDashArray().addAll(10d, 7d, 5d, 7d);
         lowestGraber = new Circle(10);
         lowestAltitude.getStyleClass().add("altitude-line");
         lowestGraber.getStyleClass().add("altitude-graber");
+        lowestAltBox.getStyleClass().add("lowest-altitude-Box");
         lowestAltBox.getChildren().add(lowestAltitude);
         lowestAltBox.getChildren().add(lowestGraber);
         lowestAltBox.setAlignment(Pos.CENTER);
-        lowestAltBox.setLayoutX(50);
+        lowestAltBox.setLayoutX(ARTBOARD_WIDTH);
         lowestAltBox.setLayoutY(talstationHeight);
+        lowestAltBox.setPrefWidth(ARTBOARD_WIDTH);
+
 
     }
 
@@ -157,18 +165,33 @@ initializeAltBox();
         drawingPane.setMaxSize(ARTBOARD_WIDTH, ARTBOARD_HEIGHT);
         drawingPane.setMinSize(ARTBOARD_WIDTH, ARTBOARD_HEIGHT);
         drawingPane.setPrefSize(ARTBOARD_WIDTH, ARTBOARD_HEIGHT);
+
     }
 
     private void layoutParts() {
         // ToDo: alle Parts zur drawingPane hinzufügen
         //drawingPane.getChildren().addAll(backgroundCircle, display);
         drawingPane.getChildren().addAll(backgroundMountain, highestAltBox, lowestAltBox);
-
+        layoutChildren();
         getChildren().add(drawingPane);
     }
 
     private void setupEventHandlers() {
         //ToDo: bei Bedarf ergänzen
+        System.out.println("im events");
+        /*highestAltBox.setOnDragDetected(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                System.out.println(event.getY());
+            }
+        });*/
+        highestAltBox.setOnMouseDragged(event ->{
+            System.out.println(event.getSceneY());
+        } );
+        lowestAltBox.setOnDragDetected(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                System.out.println(event);
+            }
+        });
     }
 
     private void setupValueChangeListeners() {

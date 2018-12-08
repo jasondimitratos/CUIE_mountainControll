@@ -27,3 +27,7 @@
 .simple-control .whole-mountain{
     -fx-background-color: red;
 }
+
+.simple-control .lowest-altitude-Box, .highest-altitude-Box{
+    -fx-background-color: blue;
+}

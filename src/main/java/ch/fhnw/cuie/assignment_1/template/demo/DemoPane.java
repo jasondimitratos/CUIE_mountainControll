@@ -8,6 +8,8 @@ import javafx.scene.layout.VBox;
 
 import ch.fhnw.cuie.assignment_1.template.MountainControl;
 
+import java.awt.desktop.SystemSleepEvent;
+
 /**
  * @author Dieter Holz
  */
@@ -47,8 +49,8 @@ public class DemoPane extends BorderPane {
         );
         controlPane.setPadding(new Insets(0, 50, 0, 50));
         controlPane.setSpacing(10);
-
-        setCenter(cc);
+        cc.setPrefWidth(50);
+        setLeft(cc);
         setRight(controlPane);
     }
 
