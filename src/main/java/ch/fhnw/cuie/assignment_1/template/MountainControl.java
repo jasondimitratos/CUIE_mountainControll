@@ -1,21 +1,10 @@
 package ch.fhnw.cuie.assignment_1.template;
 
-
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.EventHandler;
-
 import javafx.beans.property.*;
-
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.Group;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -23,32 +12,23 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.SVGPath;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextBoundsType;
-
-
 
 /**
- * ToDo: CustomControl kurz beschreiben
- * <p>
- * ToDo: Autoren ergänzen / ersetzen
+ * Mountain Control stellt die Höhe der Tal- und Bergstation visuell dar.
+ * Die Höhen lassen sich durch Mouse-Dragging verändern.
  *
+ * @author Jessica Odermatt
+ * @author Jason Dimitratos
  * @author Dieter Holz
  */
-//Todo: Umbenennen.
 public class MountainControl extends Region {
-    private static final double ARTBOARD_WIDTH = 50;  // Todo: Breite der "Zeichnung" aus dem Grafik-Tool übernehmen
-    private static final double ARTBOARD_HEIGHT = 50;  // Todo: Anpassen an die Breite der Zeichnung
-
+    private static final double ARTBOARD_WIDTH = 210;
+    private static final double ARTBOARD_HEIGHT = 190;
     private static final double ASPECT_RATIO = ARTBOARD_WIDTH / ARTBOARD_HEIGHT;
-
-    private static final double MINIMUM_WIDTH = 25;    // Todo: Anpassen
+    private static final double MINIMUM_WIDTH = 210;
     private static final double MINIMUM_HEIGHT = MINIMUM_WIDTH / ASPECT_RATIO;
-
-    private static final double MAXIMUM_WIDTH = 800;    // Todo: Anpassen
+    private static final double MAXIMUM_WIDTH = 800;
 
 
     private int liftHeight = 30;
@@ -63,11 +43,12 @@ public class MountainControl extends Region {
     private Circle highestAltitudeGraber;
     private Line lowestAltitude;
     private Circle lowestGraber;
+    private Label highestLabel;
+    private Label lowestLabel;
 
     private VBox backgroundMountain;
     private HBox highestAltBox;
     private HBox lowestAltBox;
-
 
     // needed for resizing
     private Pane drawingPane;
@@ -89,18 +70,14 @@ public class MountainControl extends Region {
         String stylesheet = getClass().getResource("style.css").toExternalForm();
         getStylesheets().add(stylesheet);
 
-        getStyleClass().add("simple-control");  // Todo: an den Namen der Klasse (des CustomControls) anpassen
+        getStyleClass().add("mountain-control");
     }
 
     private void initializeParts() {
-        //ToDo: alle deklarierten Parts initialisieren
         double center = ARTBOARD_WIDTH * 0.5;
 
         initializeBackgroundMountain();
         initializeAltBox();
-        //mountainBackground.getStyleClass().add("background-mountain");
-
-
     }
 
     private void initializeBackgroundMountain() {
@@ -119,40 +96,46 @@ public class MountainControl extends Region {
         backgroundMountain.setLayoutX(0);
         backgroundMountain.setLayoutY(0);
         backgroundMountain.setPrefSize(ARTBOARD_WIDTH, ARTBOARD_HEIGHT);
-
     }
 
     private void initializeAltBox() {
         highestAltBox = new HBox();
         highestAltitude = new Line(0, 50, 100, 50);
-        highestAltitudeGraber = new Circle(10f);
-        highestAltitude.getStrokeDashArray().addAll(10d, 7d, 5d, 7d);
-        highestAltBox.getChildren().add(highestAltitude);
+        highestAltitude.setStrokeWidth(2);
+        highestAltitudeGraber = new Circle(10);
+        highestAltitude.getStrokeDashArray().addAll(7d);
+        highestLabel = new Label("3000 müM");
+        highestLabel.setMinWidth(50);
         highestAltitude.getStyleClass().add("altitude-line");
+        highestLabel.getStyleClass().add("highest-label");
+        highestAltBox.getChildren().add(highestAltitude);
         highestAltBox.getChildren().add(highestAltitudeGraber);
-        highestAltBox.setAlignment(Pos.CENTER);
-        highestAltBox.setLayoutX(ARTBOARD_WIDTH);
+        highestAltBox.getChildren().add(highestLabel);
+        highestAltBox.setAlignment(Pos.CENTER_LEFT);
+        highestAltBox.setLayoutX(20);
         highestAltBox.setLayoutY(liftHeight);
         highestAltitudeGraber.getStyleClass().add("altitude-graber");
         highestAltBox.setPrefWidth(ARTBOARD_WIDTH);
         highestAltBox.getStyleClass().add("highest-altitude-Box");
-
-
+        
         lowestAltBox = new HBox();
         lowestAltitude = new Line(0, 50, 100, 50);
-        lowestAltitude.getStrokeDashArray().addAll(10d, 7d, 5d, 7d);
+        lowestAltitude.setStrokeWidth(2);
+        lowestAltitude.getStrokeDashArray().addAll(7d);
         lowestGraber = new Circle(10);
+        lowestLabel = new Label("100 müM");
+        lowestLabel.setMinWidth(50);
         lowestAltitude.getStyleClass().add("altitude-line");
         lowestGraber.getStyleClass().add("altitude-graber");
+        lowestLabel.getStyleClass().add("lowest-label");
         lowestAltBox.getStyleClass().add("lowest-altitude-Box");
         lowestAltBox.getChildren().add(lowestAltitude);
         lowestAltBox.getChildren().add(lowestGraber);
-        lowestAltBox.setAlignment(Pos.CENTER);
-        lowestAltBox.setLayoutX(ARTBOARD_WIDTH);
+        lowestAltBox.getChildren().add(lowestLabel);
+        lowestAltBox.setAlignment(Pos.CENTER_LEFT);
+        lowestAltBox.setLayoutX(20);
         lowestAltBox.setLayoutY(talstationHeight);
         lowestAltBox.setPrefWidth(ARTBOARD_WIDTH);
-
-
     }
 
     private void initializeDrawingPane() {
@@ -165,8 +148,6 @@ public class MountainControl extends Region {
     }
 
     private void layoutParts() {
-        // ToDo: alle Parts zur drawingPane hinzufügen
-        //drawingPane.getChildren().addAll(backgroundCircle, display);
         drawingPane.getChildren().addAll(backgroundMountain, highestAltBox, lowestAltBox);
         layoutChildren();
         getChildren().add(drawingPane);
@@ -272,8 +253,6 @@ public class MountainControl extends Region {
     }
 
     // alle getter und setter  (generiert via "Code -> Generate... -> Getter and Setter)
-
-
     public String getLiftHeightPoint() {
         return liftHeightPoint.get();
     }

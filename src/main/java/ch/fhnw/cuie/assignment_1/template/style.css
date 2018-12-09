@@ -1,33 +1,40 @@
-.simple-control {
+.mountain-control {
     -fx-padding: 5;/*
     -fx-background-color: rgb(12, 12, 12);
     -base-color: rgb(2, 138, 204);*/
 }
 
-.simple-control .background-circle {
+.mountain-control .background-circle {
     -fx-fill: -base-color;
 }
 
-.simple-control .display {
+.mountain-control .display {
     -fx-font-family: 'Lato Light';
     -fx-font-size: 24;
     -fx-fill: derive(-base-color, 95%);
 }
 
-.simple-control .background-snow {
+.mountain-control .background-snow {
     -fx-fill: #f7f7d3;
     -fx-stroke: black;
     -fx-stroke-width: 3;
 }
-.simple-control .background-bottom {
+.mountain-control .background-bottom {
     -fx-fill: #559a49;
     -fx-stroke: black;
     -fx-stroke-width: 1.5;
 }
-.simple-control .whole-mountain{
+.mountain-control .highest-label,
+.mountain-control .lowest-label {
+    -fx-padding: 5;
+}
+
+/* for testing
+.mountain-control .whole-mountain{
     -fx-background-color: red;
 }
 
-.simple-control .lowest-altitude-Box, .highest-altitude-Box{
+.mountain-control .lowest-altitude-Box, .highest-altitude-Box{
     -fx-background-color: blue;
 }
+ */

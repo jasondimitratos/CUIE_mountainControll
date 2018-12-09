@@ -41,14 +41,13 @@ public class DemoPane extends BorderPane {
     }
 
     private void layoutControls() {
+        setCenter(mc);
         VBox controlPane = new VBox(
                 new Label("Bergstation (m.ü.M."), liftField,
                 new Label("Talstation (m.ü.M."), talstationField
         );
-        controlPane.setPadding(new Insets(0, 50, 0, 50));
+        controlPane.setPadding(new Insets(10));
         controlPane.setSpacing(10);
-
-        setLeft(mc);
         setRight(controlPane);
     }
 
