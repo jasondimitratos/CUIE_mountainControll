@@ -5,6 +5,7 @@ import javafx.beans.property.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -33,7 +34,7 @@ public class MountainControl extends Region {
 
     private int liftHeight = 30;
     private int talstationHeight = 80;
-    private StringProperty liftHeightPoint = new SimpleStringProperty();
+    private StringProperty liftHeightPoint = new SimpleStringProperty("3000 müM");
     private StringProperty talstationPoint = new SimpleStringProperty();
 
     private SVGPath mountainBackgroundSnow;
@@ -104,6 +105,7 @@ public class MountainControl extends Region {
         highestAltitude.setStrokeWidth(2);
         highestAltitudeGraber = new Circle(10);
         highestAltitude.getStrokeDashArray().addAll(7d);
+        //@Todo setup binding
         highestLabel = new Label("3000 müM");
         highestLabel.setMinWidth(50);
         highestAltitude.getStyleClass().add("altitude-line");
@@ -154,7 +156,6 @@ public class MountainControl extends Region {
     }
 
     private void setupEventHandlers() {
-        //ToDo: bei Bedarf ergänzen
         System.out.println("im events");
         /*highestAltBox.setOnDragDetected(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
@@ -162,13 +163,35 @@ public class MountainControl extends Region {
             }
         });*/
         highestAltBox.setOnMouseDragged(event ->{
-            System.out.println(event.getSceneY());
-        } );
-        lowestAltBox.setOnDragDetected(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                System.out.println(event);
+            double eventheight = event.getSceneY();
+            //@Todo get height even if resized
+            double maxheight = backgroundMountain.getHeight();
+            double maxrealheight = 3000;
+            System.out.println(eventheight);
+
+            if (eventheight > 0 && eventheight < maxheight && eventheight < lowestAltBox.getLayoutY()) {
+
+                highestAltBox.setLayoutY(eventheight);
+                double temp = maxrealheight - (maxrealheight*eventheight)/maxheight;
+                liftHeightPoint.setValue(Math.round (temp) + " müM");
+                //liftHeightPoint.setValue(temp + " müM");
+                //System.out.println("sfsf"+ backgroundMountain.getHeight());
             }
-        });
+
+        } );
+        lowestAltBox.setOnMouseDragged(event ->{
+            double eventheight = event.getSceneY();
+            double maxrealheight = 3000;
+            double maxheight = backgroundMountain.getHeight();
+            System.out.println(eventheight);
+            if (eventheight > 0 && eventheight < backgroundMountain.getHeight() && eventheight > highestAltBox.getLayoutY()) {
+                lowestAltBox.setLayoutY(eventheight);
+                double temp = maxrealheight - (maxrealheight*eventheight)/maxheight;
+                talstationPoint.setValue(Math.round (temp) + " müM");
+            }
+
+        } );
+
     }
 
     private void setupValueChangeListeners(){
@@ -193,6 +216,8 @@ public class MountainControl extends Region {
 
     private void setupBinding() {
         //ToDo dieses Binding ersetzen
+        highestLabel.textProperty().bind(liftHeightPointProperty());
+        lowestLabel.textProperty().bind(talstationPointProperty());
     }
 
 
