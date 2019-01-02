@@ -30,6 +30,7 @@ public class MountainControl extends Region {
     private static final double MINIMUM_WIDTH = 210;
     private static final double MINIMUM_HEIGHT = MINIMUM_WIDTH / ASPECT_RATIO;
     private static final double MAXIMUM_WIDTH = 800;
+    private static final double MAX_REAL_HEIGHT = 3000;
 
 
     private int liftHeight = 30;
@@ -157,22 +158,18 @@ public class MountainControl extends Region {
 
     private void setupEventHandlers() {
         System.out.println("im events");
-        /*highestAltBox.setOnDragDetected(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                System.out.println(event.getY());
-            }
-        });*/
+
         highestAltBox.setOnMouseDragged(event ->{
             double eventheight = event.getSceneY();
             //@Todo get height even if resized
             double maxheight = backgroundMountain.getHeight();
-            double maxrealheight = 3000;
+
             System.out.println(eventheight);
 
             if (eventheight > 0 && eventheight < maxheight && eventheight < lowestAltBox.getLayoutY()) {
 
                 highestAltBox.setLayoutY(eventheight);
-                double temp = maxrealheight - (maxrealheight*eventheight)/maxheight;
+                double temp = MAX_REAL_HEIGHT - (MAX_REAL_HEIGHT*eventheight)/maxheight;
                 liftHeightPoint.setValue(Math.round (temp) + " müM");
                 //liftHeightPoint.setValue(temp + " müM");
                 //System.out.println("sfsf"+ backgroundMountain.getHeight());
@@ -193,16 +190,16 @@ public class MountainControl extends Region {
         } );
 
     }
+    private void calculatePosition(double height){
 
+    }
     private void setupValueChangeListeners(){
         liftHeightPointProperty().addListener(((observable, oldValue, newValue) -> {
             liftHeight = getInt(newValue);
-            System.out.println("liftHeight: " + liftHeight);
         }));
 
         talstationPointProperty().addListener(((observable, oldValue, newValue) -> {
             talstationHeight = getInt(newValue);
-            System.out.println("talstationHeight: " + talstationHeight);
         }));
     }
 
